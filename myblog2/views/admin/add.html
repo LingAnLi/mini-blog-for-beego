@@ -1,0 +1,67 @@
+<script type="text/javascript" src="/static/js/editor.js"></script>
+<div  style="margin-top:60px;margin-left: 210px;">
+    <h3 class="review_title">添加文章</h3>
+    <div class="form_group">
+        <label>文章标题：</label>
+        <input type="text" class="input_txt2" name="articleName" >
+    </div>
+    <div class="form_group">
+        <label>文章类型：</label>
+        <select class="sel_opt" name="articleTypeId">
+            {{range .twoArtType}}
+
+                <option value="{{.Id}}">{{.ArticleType.TypeName}}/{{.TypeName}}</option>
+            {{end}}
+        </select>
+        <label>文章标签：</label>
+        {{range .articleLabel}}
+            {{.Name}}
+            <input type="checkbox" name="mylabel" value="{{.Id}}">
+        {{end}}
+    </div>
+    <div id="div2">
+
+    </div>
+    <div id="div1" >
+        <p><h1>在这里输入内容</h1></p>
+    </div>
+  <input type="button" class="btn" value="提交" style="width: 100px;height: 36px">
+</div>
+<script type="text/javascript">
+    $(function () {
+    var E = window.wangEditor;
+    var editor = new E('#div2','#div1');
+
+    // 配置服务器端地址
+    editor.customConfig.uploadImgServer = '/admin/upload/{{.key}}';
+    editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024;
+    editor.customConfig.uploadFileName = 'ImgName';
+
+
+    editor.customConfig.withCredentials = true;
+
+        editor.create();
+        $('.btn').click(function () {
+            artiName=$('.input_txt2').val();
+            twoArticleName=$("select[name='articleTypeId']").val();
+
+            var mylabel =new Array();
+           $("input[name='mylabel']:checked").each(function () {
+               mylabel.push($(this).val())
+            });
+            mylabel=mylabel.join("-");
+            js={"artiName":artiName,"twoArticleName":twoArticleName,"content":editor.txt.html(),"mylabel":mylabel};
+            console.log(js);
+            $.post("/admin/addArticle/{{.key}}",js,function (data) {
+               if (data.code==0){
+                   alert("ok")
+               }else {
+                   console.log(data);
+                   alert(data.msg)
+               }
+            })
+        })
+    })
+
+</script>
+

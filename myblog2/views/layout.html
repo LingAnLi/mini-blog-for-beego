@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>BY小白个人博客-分享IT技术的个人博客</title>
+    <meta name="keywords" content="blog" />
+    <meta name="description" content="blog" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{template "tmplate/link.html"}}
+</head>
+<body>
+<!--top begin-->
+<header id="header">
+    <div class="navbox">
+        <h2 id="mnavh"><span class="navicon"></span></h2>
+        <div class="logo"><a href="/">BY小白个人博客</a></div>
+        <nav>
+            <ul id="starlist">
+                <li><a href="/">首页</a></li>
+                {{range .ArticleTypes}}
+
+
+                         <li><a href="/list?typeId={{.Id}}">{{.TypeName}}</a></li>
+
+
+
+                {{end}}
+                <li class="menu"><a href="JavaScript:;">所有分类</a>
+
+
+                    <ul class="sub">
+                        {{range $.TwoArticleTypes}}
+                                <li><a href="/list?typeId={{.ArticleType.Id}}&towTypeId={{.Id}}">{{.TypeName}}</a></li>
+                        {{end}}
+                    </ul>
+
+                    <span></span></li>
+
+
+                <li><a href="about.html">关于我</a></li>
+                {{/*{{if .isLogin}}*/}}
+                    {{/*<li><a href="#">欢迎你：{{.user.Name}}</a></li>*/}}
+                    {{/*<li><a href="/logout">退出</a></li>*/}}
+                {{/*{{else}}*/}}
+                    {{/*<li><a href="/register">注册</a></li>*/}}
+                    {{/*<li><a href="/login">登入</a></li>*/}}
+                {{/*{{end}}*/}}
+
+            </ul>
+        </nav>
+        <div class="searchico"></div>
+    </div>
+</header>
+<div class="searchbox">
+    <div class="search">
+        <form action="/seek" method="get" name="searchform" id="searchform">
+            <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字词" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字词'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字词'}" type="text">
+            <input name="show" value="title" type="hidden">
+            <input name="tempid" value="1" type="hidden">
+            <input name="tbname" value="news" type="hidden">
+            <input name="Submit" class="input_submit" value="搜索" type="submit">
+        </form>
+    </div>
+    <div class="searchclose"></div>
+</div>
+<!--top end-->
+{{.LayoutContent}}
+<footer>
+    <div class="box">
+        <div class="wxbox">
+            <ul>
+                <li><img src="/static/images/wx.png"><span>我的微信</span></li>
+            </ul>
+        </div>
+        <div class="endnav">
+            <p><b>备案号：</b></p>
+            <p>赣ICP备19007534号</p>
+          </div>
+    </div>
+    <a href="#">
+        <div class="top"></div>
+    </a> </footer>
+</body>
+</html>

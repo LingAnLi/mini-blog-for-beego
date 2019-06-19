@@ -1,0 +1,53 @@
+
+    <div class="main_body" id="main_body">
+        <div class="breadcrub">
+            当前位置：文章管理>文章列表
+        </div>
+        <div class="">
+            <span class="sel_label">请选择文章分类：</span>
+            <select name="select" id="select" class="sel_opt">
+                {{range .twoArtTypes}}
+                        <option selected="true">{{.ArticleType.Id}}/{{.ArticleType.TypeName}}/{{.TypeName}}</option>
+                {{end}}
+            </select>
+
+            <table class="common_table">
+                <tr>
+                    <th width="30%">文章标题</th>
+                    <th width="12%">添加时间</th>
+                    <th width="10%">文章内容</th>
+                    <th width="5%">阅读量</th>
+                    <th width="5%">删除</th>
+                    <th width="6%">编辑</th>
+                    <th width="7%">文章类型1</th>
+                    <th width="7%">文章类型2</th>
+                    <th width="10%">发布用户</th>
+                    <th width="10%">是否删除</th>
+                </tr>
+
+                {{range .article}}
+                <tr>
+                    <td>{{.ArtiName}}</td>
+                    <td>{{.Atime.Format "2006-01-02-15:04"}}</td>
+                    <td><a href="/admin/content?id={{.Id}}">查看详情</a></td>
+                    <td>3</td>
+                    <td><a href="#" class="dels">删除</a></td>
+                    <td><a href="#">编辑</a></td>
+                    <td>{{.TwoArticleType.ArticleType.Id}}</td>
+                    <td>{{.TwoArticleType.TypeName}}</td>
+                    <td>{{.User.Name}}</td>
+                    <td>{{.IsDel}}</td>
+                </tr>
+            {{end}}
+            </table>
+
+            <ul class="pagenation">
+                <li><a href="#">首页</a></li>
+                <li><a href="javascript:;">上一页 </a> </li>
+                <li> <a href="javascript:;">下一页</a></li>
+                <li><a href="#">末页</a></li>
+                <li>共5条记录/共5页/当前1页</li>
+            </ul>
+        </div>
+    </div>
+

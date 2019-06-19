@@ -1,0 +1,35 @@
+
+        <div style="margin-top:60px;margin-left: 210px;">
+        <div class="breadcrub">
+            当前位置：文章管理>添加分类
+        </div>
+            <div>
+            <table class="common_table">
+                <tr>
+                    <th width="10%">id</th>
+                    <th width="70%">标签</th>
+                    <th width="20%">管理操作</th>
+                </tr>
+
+                {{range $i,$v:= .lable}}
+
+                    <tr>
+                        <td>{{ShowI $i}}</td>
+                        <td>{{$v.Name}}</td>
+                        <td><a href="/admin/deleteLable?lableid={{$v.Id}}" class="edit">删除</a></td>
+                    </tr>
+                {{end}}
+
+                <tr>
+                    <td colspan="3">
+                    <form action="addLable" class="form1">
+                        <input type="text" class="type_txt" placeholder="增加标签" name="LableName">
+                        <input type="submit" class="addtype" value="增加标签">
+                    </form>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+
+    </div>

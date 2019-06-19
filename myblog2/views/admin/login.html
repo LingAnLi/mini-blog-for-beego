@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+        <link rel="stylesheet" type="text/css" href="/static/css/reseter.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+</head>
+<body>
+    <div class="login_bg">
+
+    </div>
+    <form  class="login_form"  name = "login" method="post" action="/login">
+        <h1 class="login_title" style="background-color: rgba(26,179,148,0.6);">用户登录</h1>
+        <input type="text"  class="input_txt" name = "userName" style="background-color: rgba(255,255,255,0.4);">
+        <input type="password" name = "passWord"  class="input_txt" style="background-color: rgba(255,255,255,0.4);">
+        <div class="remember"><input type="checkbox" name="remember" ><label>七日免登入</label></div>
+        <input type="submit" value="登 录" class="input_sub" style="background-color: rgba(26,179,148,0.6);">
+    </form>
+    <style>
+        .login_form{
+
+            background-color: rgba(255,255,255,0.5);
+
+        }
+
+    </style>
+</body>
+</html>

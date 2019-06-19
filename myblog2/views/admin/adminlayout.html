@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理页面</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/reseter.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+
+</head>
+<body>
+
+<div class="header">
+    <a href="#" class="logo fl"><h1>文章发布</h1></a>
+    <a href="#" class="logout fr">退 出</a>
+</div>
+
+<div class="side_bar">
+    <div class="user_info">
+        <img src="/static/images/person.png" alt="头像">
+        <p>欢迎你 <em>{{.user.Name}}</em></p>
+    </div>
+
+    <div class="menu_con">
+        <div class="first_menu active"><a href="javascript:;" class="icon02">文章管理</a></div>
+        <ul class="sub_menu show">
+            <li><a href="/admin/index.html" class="icon031">文章列表</a></li>
+            <li><a href="/admin/add.html" class="icon032">添加文章</a></li>
+            <li><a href="/admin/addType.html" class="icon034">添加分类</a></li>
+            <li><a href="/admin/addLable.html" class="icon034">添加标签</a></li>
+        </ul>
+    </div>
+</div>
+{{.LayoutContent}}
+</body>
+</html>

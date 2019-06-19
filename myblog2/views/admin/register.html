@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/reseter.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <script type="text/javascript"src="/static/js/jquery-1.8.3.min.js">
+    </script>
+</head>
+<body>
+<style>
+    .register_form{
+        width:330px;
+        height:400px;
+        background-color: rgba(255,255,255,0.5);
+        position:fixed;
+        left:50%;
+        top:50%;
+        margin-top:-200px;
+        margin-left:-165px;
+        overflow:hidden;
+        border-radius:6px;
+    }
+    .register_form input{
+        background-color: rgba(255,255,255,0.5);
+    }
+    .register_form label{
+        color:rgba(255,255,255,0.6) ;
+    }
+</style>
+<div class="login_bg">
+
+</div>
+<form  class="register_form"  name = "login" >
+    <h1 class="login_title" style="background-color: rgba(26,179,148,0.6);">用户注册</h1>
+    <input type="text"  class="input_txt Email" name = "Email" placeholder="请输入邮箱">
+    <input type="text"  class="input_txt userName" name = "userName" placeholder="请输入用户名">
+    <input type="passWord"  class="input_txt passWord" name = "passWord" placeholder="请输入密码">
+    <input type="password" name = "passWord"  class="input_txt passWord2" placeholder="请再次确认密码">
+    <div class="admin"><input type="checkbox" name="admin" ><label>注册为管理员</label></div>
+    <input type="button" value="用户注册" class="input_sub">
+</form>
+<script type="text/javascript">
+   $(function () {
+       $('.input_sub').click(function () {
+           $reg = $('.register_form');
+           $admin=$('input[name="admin"]:checked').val();
+           $Email=$reg.children('.Email').val();
+           $userName=$reg.children('.userName').val();
+           $passWord=$reg.children('.passWord').val();
+           $passWord2=$reg.children('.passWord2').val();
+           json={"Email":$Email,"userName":$userName,"passWord":$passWord,"passWord2":$passWord2,"admin":$admin};
+           //console.log(json);
+           $.post("/register",json,function (data) {
+               if (data.code==0){
+                   alert(data.msg);
+                  console.log(data);
+                   window.location.href=data.url
+               }else {
+                   alert(data.msg)
+               }
+           })
+       })
+   })
+</script>
+</body>
+</html>

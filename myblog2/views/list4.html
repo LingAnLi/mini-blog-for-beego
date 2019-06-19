@@ -1,0 +1,47 @@
+
+<article> 
+  <!--lbox begin-->
+
+
+    <div class="whitebg bloglist">
+
+      <h2 class="htitle"><span class="hnav">
+          {{range .twoArtType}}
+          <a href="/list?typeId={{$.oneType.Id}}&towTypeId={{.Id}}">{{.TypeName}}</a>
+          {{end}}
+        </span>{{.oneType.TypeName}}</h2>
+
+      <ul>
+        <!--纯文字-->
+        {{range .articles}}
+        <li>
+          <h3 class="blogtitle"><a href="/content?id={{.Id}}" target="_blank">{{.ArtiName}}</a></h3>
+          <p class="blogtext">{{html2str .Acontent}}</p>
+          <p class="bloginfo"><i class="avatar"><img src="/static/images/avatar.jpg"></i><span>{{.User.Name}}</span><span>{{.Atime.Format "2006-01-02:15:04"}}</span>
+
+            <span>【<a href="/list?typeId={{$.oneTypeId}}&towTypeId={{.TwoArticleType.Id}}">{{.TwoArticleType.TypeName}}</a>】</span>
+            {{range .ArticLabels}}
+            <span>【{{.Name}}】</span>
+            {{end}}
+          </p>
+          <a href="/content?id={{.Id}}" class="viewmore">阅读更多</a> </li>
+        {{end}}
+      </ul>
+      <!--pagelist-->
+      <div class="pagelist">
+        <a title="Total record">&nbsp;<b>总页数：{{.pageEnd}}</b> </a>
+        <a href="/seek?keyboard={{.keyboard}}&PageIndex={{PrePage .pageIndex}}">上一页</a>&nbsp;
+        {{range $index,$val:= .pages}}
+          {{if compare $val $.pageIndex}}
+            &nbsp;&nbsp;&nbsp;<b>{{$val}}</b>&nbsp;
+          {{else}}
+              <a href="/seek?keyboard={{.keyboard}}&PageIndex={{$val}}">{{$val}}</a>&nbsp;
+          {{end}}
+        {{end}}
+        <a href="/seek?keyboard={{.keyboard}}&PageIndex={{NextPage .pageIndex .pageEnd}}">下一页</a>&nbsp;
+        <a href="/seek?keyboard={{.keyboard}}&PageIndex={{.pageEnd}}">尾页</a></div>
+      <!--pagelist end--> 
+    </div>
+    
+    <!--bloglist end-->
+</article>
