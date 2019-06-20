@@ -38,7 +38,7 @@
     <input type="text"  class="input_txt userName" name = "userName" placeholder="请输入用户名">
     <input type="passWord"  class="input_txt passWord" name = "passWord" placeholder="请输入密码">
     <input type="password" name = "passWord"  class="input_txt passWord2" placeholder="请再次确认密码">
-    <div class="admin"><input type="checkbox" name="admin" ><label>注册为管理员</label></div>
+    {{/*<div class="admin"><input type="checkbox" name="admin" ><label>注册为管理员</label></div>*/}}
     <input type="button" value="用户注册" class="input_sub">
 </form>
 <script type="text/javascript">
@@ -51,8 +51,8 @@
            $passWord=$reg.children('.passWord').val();
            $passWord2=$reg.children('.passWord2').val();
            json={"Email":$Email,"userName":$userName,"passWord":$passWord,"passWord2":$passWord2,"admin":$admin};
-           //console.log(json);
-           $.post("/register",json,function (data) {
+           console.log(json);
+           $.post("/regist",json,function (data) {
                if (data.code==0){
                    alert(data.msg);
                   console.log(data);

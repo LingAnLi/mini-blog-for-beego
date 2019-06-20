@@ -51,9 +51,7 @@ func (this *IndexController) ShowArticle() {
 		PageIndex=1
 	}
 	articles,twoTypes,oneType:=this.GetArticles(TypeId,TwoTypeId,PageIndex)
-	this.ClickTop(TypeId,TwoTypeId)
-	this.Guess()
-	this.Recommend(TypeId,TwoTypeId)
+	this.ShowToplist(TypeId,TwoTypeId)
 
 	this.Data["oneType"]=oneType
 	this.Data["twoArtType"]=twoTypes

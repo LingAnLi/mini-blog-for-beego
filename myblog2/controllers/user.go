@@ -7,6 +7,7 @@ import (
 	"myblog2/models"
 	"myblog2/syserror"
 	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -67,8 +68,9 @@ func(this*UserControllers)Register() {
 
 	this.TplName="admin/register.html"
 }
-//@router /register [post]
+//@router /regist [post]
 func(this*UserControllers)Reg() {
+	beego.Info("xxxx")
 	o:=orm.NewOrm()
 	var user models.User
 	//{"Email":,"userName":"passWord":,"passWord2":,"admin":};
@@ -102,16 +104,17 @@ func(this*UserControllers)Reg() {
 	o.Begin()
 	_,err=o.Insert(&user)
 	if err!=nil{
+		o.Rollback()
 		this.Abort500(errors.New("注册失败，请重新尝试"))
 	}
-	err=SendEmail(user.Email)
-	if err!=nil{
-		o.Rollback()
-		this.Abort500(err)
-	}
+	//err=SendEmail(user.Email,user.Id)
+	//if err!=nil{
+	//	o.Rollback()
+	//	this.Abort500(err)
+	//}
 	o.Commit()
-
-	this.JsonOk("前往邮箱激活","/login")
+	//直接跳转激活页面————》如果发送邮件激活URL就跳转其他地址
+	this.JsonOk("前往邮箱激活","/active?id="+strconv.Itoa(user.Id))
 }
 //@router /active [get]
 func(this*UserControllers)Active(){
@@ -142,8 +145,15 @@ func IsEmail(email string) bool {
 	reg := regexp.MustCompile(pattern)
 	return reg.MatchString(email)
 }
-func SendEmail(email string)error{
-	//发送激活邮件--》》/active?id=user.Id
-
-	return nil
-}
+//发送激活邮件--》》/active?id=user.Id
+//func SendEmail(ToSomeBody string,id int)(err error){
+//	emailconfig:=`{"username":"lilingan96@163.com","password":"gwdqprwdzgupeca1","host":"smtp.163.com","port":25}`
+//	emailconn:=utils.NewEMail(emailconfig)
+//	emailconn.From="lilingan96@163.com"
+//	emailconn.To=[]string{ToSomeBody}
+//	emailconn.Subject="用户注册"
+//	emailconn.Text="激活邮件"+"http://www.byxiaobai.cn/activate?id="+strconv.Itoa(id)
+//	//发送————》取消注释
+//	//err=emailconn.Send()
+//	return
+//}

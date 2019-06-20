@@ -91,6 +91,5 @@ orm.RegisterModel(new(Praise),new(ArticIMG),new(User),new(Article),new(ArticleTy
 //生成表
 //第一个参数是数据库别名，第二个参数是是否强制更新
 orm.RunSyncdb("default",false,true)
-//操作表
 
 }

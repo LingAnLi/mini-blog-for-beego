@@ -18,14 +18,14 @@ type BaseControllers struct {
 }
 
 func(this*BaseControllers)Prepare(){
-	//user,ok:=this.GetSession(SESSION_USER_KEY).(models.User)
-	//this.Islogin=false
-	//if ok{
-	//	this.User=user
-	//	this.Islogin=true
-		//this.Data["user"]=this.User
+	user,ok:=this.GetSession(SESSION_USER_KEY).(models.User)
+	this.Islogin=false
+	if ok{
+		this.User=user
+		this.Islogin=true
+		this.Data["user"]=this.User
 
-	//}
+	}
 	var articleTypes []models.ArticleType
 	var twoArticleTypes []models.TwoArticleType
 	o:=orm.NewOrm()
@@ -35,7 +35,7 @@ func(this*BaseControllers)Prepare(){
 	this.Data["count"]=count
 	this.Data["TwoArticleTypes"]=twoArticleTypes
 	this.Data["ArticleTypes"]=articleTypes
-	//this.Data["isLogin"]=this.Islogin
+	this.Data["isLogin"]=this.Islogin
 }
 func(this*BaseControllers)Abort500(err error){
 	this.Data["error"]=err
@@ -173,23 +173,6 @@ func(this*BaseControllers)ShowPages(PageIndex,PageEnd int){
 func(this*BaseControllers)RtUser()interface{} {
 	return this.User
 }
-//猜你喜欢
-func(this*BaseControllers)Guess(){
-	user,ok:=this.GetSession(SESSION_USER_KEY).(models.User)
-	o:=orm.NewOrm()
-	var GuessArticles []models.Article
-	var Praise models.Praise
-	if ok{
-		o.QueryTable("Praise").Filter("UserId",user.Id).Limit(1).OrderBy("-Id").One(&Praise)
-		var tmp models.Article
-		o.QueryTable("Article").RelatedSel("TwoArticleType").Filter("Id",Praise.ArticleId).One(&tmp)
-		o.QueryTable("Article").RelatedSel("TwoArticleType").Filter("TwoArticleType__Id",tmp.TwoArticleType.Id).Limit(4).OrderBy("-Id").All(&GuessArticles)
-
-
-
-	}
-	this.Data["Guess"]=GuessArticles
-}
 //推荐
 func(this*BaseControllers)Recommend(TypeId ,TwoTypeId int){
 	o:=orm.NewOrm()
@@ -214,6 +197,5 @@ func(this*BaseControllers)Recommend(TypeId ,TwoTypeId int){
 func(this*BaseControllers)ShowToplist(TypeId ,TwoTypeId int){
 	this.ClickTop(TypeId ,TwoTypeId)
 	this.Recommend(TypeId ,TwoTypeId)
-	this.Guess()
 }
 
