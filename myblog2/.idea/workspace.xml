@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd7a841b-ea14-4112-b635-1fd779ee0fe6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/base.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/base.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/index.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/index.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myblog2" beforeDir="false" afterPath="$PROJECT_DIR$/myblog2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routers/commentsRouter_controllers.go" beforeDir="false" afterPath="$PROJECT_DIR$/routers/commentsRouter_controllers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/layout.html" afterDir="false" />
-    </list>
+    <list default="true" id="cd7a841b-ea14-4112-b635-1fd779ee0fe6" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,9 +241,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1533" y="35" width="1432" height="802" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49778762" visible="true" weight="0.19784173" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49778762" visible="true" weight="0.19784173" />
       <window_info id="Structure" order="1" sideWeight="0.5022124" side_tool="true" weight="0.14988105" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -268,7 +255,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49773413" visible="true" weight="0.3112676" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49773413" visible="true" weight="0.3112676" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5022659" side_tool="true" weight="0.54011464" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
