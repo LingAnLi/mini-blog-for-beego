@@ -28,7 +28,7 @@ type ArticLabel struct {
 type Article struct {
 	Id int `orm:"pk;auto"`
 	ArtiName string `orm:"size(20)"`//标题
-	Atime time.Time `orm:"auto_now"`
+	Atime time.Time
 	Acount int `orm:"default(0);null"`
 	Acontent string	`orm:"type(text)"`
 	ArticLabels []*ArticLabel `orm:"rel(m2m)"`
@@ -77,13 +77,12 @@ type ArticBanner struct {
 //图片
 type ArticIMG struct {
 	Id int
-	Key string
 	Addr string
 }
 func init(){
 //ORM操作数据库
 //获取连接对象
-orm.RegisterDataBase("default","mysql","root:rootroot@tcp(127.0.0.1:3306)/test?charset=utf8")
+orm.RegisterDataBase("default","mysql","root:rootroot@tcp(127.0.0.1:3306)/test?charset=utf8&loc=Local")
 
 //创建表
 orm.RegisterModel(new(Praise),new(ArticIMG),new(User),new(Article),new(ArticleType),new(TwoArticleType),new(ArticLabel),new(ArticIndexBanner),new(ArticBanner))

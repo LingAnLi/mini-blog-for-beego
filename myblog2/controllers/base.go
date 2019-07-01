@@ -88,7 +88,7 @@ func (this*BaseControllers)UUID()string{
 func (this*BaseControllers)UpImgOk(addr string){
 	mp:=make(map[string]interface{})
 	mp["errno"]=0
-	mp["data"]=[]string{"http://www.byxiaobai.cn/static/fdfs/"+addr}
+	mp["data"]=[]string{"http://www.byxiaobai.cn"+addr}
 	this.Data["json"]=mp
 	this.ServeJSON()
 }
@@ -131,9 +131,10 @@ func (this*BaseControllers)GetContent(id int)(artic models.Article){
 	if err!=nil{
 		this.Abort500(err)
 	}
-	artic.Acount+=1
-	o.Update(&artic)
-	o.LoadRelated(&artic,"ArticLabels")
+		artic.Acount+=1
+		o.Update(&artic)
+		o.LoadRelated(&artic,"ArticLabels")
+
 	return
 }
 func (this*BaseControllers)ClickTop(TypeId ,TwoTypeId int){
@@ -193,7 +194,7 @@ func(this*BaseControllers)Recommend(TypeId ,TwoTypeId int){
 	}
 
 }
-//推荐猜你喜欢点击排行
+//推荐——点击排行——相关文章
 func(this*BaseControllers)ShowToplist(TypeId ,TwoTypeId int){
 	this.ClickTop(TypeId ,TwoTypeId)
 	this.Recommend(TypeId ,TwoTypeId)

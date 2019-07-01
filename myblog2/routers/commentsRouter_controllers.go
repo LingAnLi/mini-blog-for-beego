@@ -207,18 +207,18 @@ func init() {
 
     beego.GlobalControllerRouter["myblog2/controllers:UserControllers"] = append(beego.GlobalControllerRouter["myblog2/controllers:UserControllers"],
         beego.ControllerComments{
-            Method: "Register",
-            Router: `/register`,
-            AllowHTTPMethods: []string{"get"},
+            Method: "Reg",
+            Router: `/regist`,
+            AllowHTTPMethods: []string{"post"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})
 
     beego.GlobalControllerRouter["myblog2/controllers:UserControllers"] = append(beego.GlobalControllerRouter["myblog2/controllers:UserControllers"],
         beego.ControllerComments{
-            Method: "Reg",
-            Router: `/regist`,
-            AllowHTTPMethods: []string{"post"},
+            Method: "Register",
+            Router: `/register`,
+            AllowHTTPMethods: []string{"get"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})

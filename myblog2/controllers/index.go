@@ -38,13 +38,14 @@ func (this *IndexController) ShowDiary() {
 // @router /list [get]
 func (this *IndexController) ShowArticle() {
 	//this.Data["ttle"]="技术分享"
-	TypeId,err:=this.GetInt("typeId")
-	if err!=nil{
-		this.Abort500(errors.New("获取类型失败"))
-	}
+
 	TwoTypeId,err:=this.GetInt("towTypeId")
 	if err!=nil{
 		TwoTypeId=-1
+	}
+	TypeId,err:=this.GetInt("typeId")
+	if err!=nil{
+		this.Abort500(errors.New("获取类型失败"))
 	}
 	PageIndex,err:=this.GetInt("PageIndex")
 	if err!=nil||PageIndex<1{

@@ -16,10 +16,7 @@ func (this *ContentControllers) ShowContent(){
 		this.Abort500(errors.New("参数错误"))
 	}
 	artic:=this.GetContent(id)
-
-	count,_:=orm.NewOrm().QueryTable("Praise").Filter("ArticleId",id).Count()
 	this.ShowToplist(0,artic.TwoArticleType.Id)
-	this.Data["count"]=count
 	this.Data["article"]=artic
 	this.Layout="layout.html"
 	this.TplName="info.html"

@@ -1,14 +1,17 @@
 package controllers
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"errors"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	"github.com/weilaihui/fdfs_client"
 	"myblog2/models"
-	"path/filepath"
+	"os"
+	"path"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type ArticleControllers struct {
@@ -174,7 +177,8 @@ func(this*ArticleControllers)UploadImg(){
 	if len(key)==0{
 
 	}
-	//保存数据
+	//使用redis保存数据
+	/*
 	conn,err:=fdfs_client.NewFdfsClient("/etc/fdfs/client.conf")
 	if err!=nil{
 		beego.Error("连接错误",err)
@@ -193,15 +197,61 @@ func(this*ArticleControllers)UploadImg(){
 		beego.Error("存图片错误",err)
 		this.Abort500(err)
 	}
-	var Img models.ArticIMG
-	Img.Addr=res.RemoteFileId
-	Img.Key=key
-	_,err=orm.NewOrm().Insert(&Img)
-	if err!=nil{
-		beego.Error("存图片错误",err)
-		this.Abort500(err)
+	*/
+	//保存数据到 ./data/artIng
+	t:=time.Now().Format("2006-01-02")
+	//判断文件夹是否存在
+	_,err:=os.Stat("./data/artIng/"+t)
+	if err !=nil{
+		if os.IsNotExist(err){
+			err:=os.MkdirAll("./data/artIng/"+t,0766)
+			if err!=nil{
+				this.Abort500(err)
+			}
+		}
 	}
-	this.UpImgOk(Img.Addr)
+	//存储文件夹是否存在、不存在则创建
+	_,err=os.Stat("./data/artIng/"+t+"/"+key)
+	if err !=nil{
+		if os.IsNotExist(err){
+			err:=os.MkdirAll("./data/artIng/"+t+"/"+key,0766)
+			if err!=nil{
+				this.Abort500(err)
+			}
+		}
+	}
+	//获取文件后缀
+	f,h,err:=this.GetFile("ImgName")
+	ext:=path.Ext(h.Filename)
+	//处理图片
+	buf:=make([]byte,h.Size)
+	f.Read(buf)
+	//获取md5值
+	res:=md5.Sum(buf)
+	fileName:=hex.EncodeToString(res[:])
+	//查询文件是否存在
+	o:=orm.NewOrm()
+	var Img models.ArticIMG
+	n,_:=o.QueryTable("ArticIMG").Filter("Addr__icontains",fileName).Count()
+	addr:="./data/artIng/"+t+"/"+key+"/"+fileName+ext
+	if n==0{
+		//保存文件
+		this.SaveToFile("ImgName",addr)
+		//存入数据库
+		Img.Addr=addr[1:]
+		_,err=o.Insert(&Img)
+		if err!=nil{
+			beego.Error("存图片错误",err)
+			this.Abort500(err)
+		}
+		this.UpImgOk(addr[1:])
+	}else {
+		o.QueryTable("ArticIMG").Filter("Addr__icontains",fileName).One(&Img)
+		addr=Img.Addr
+		this.UpImgOk(addr)
+	}
+
+
 }
 //实现添加文章功能
 //@router /admin/addArticle/:key [post]
@@ -229,6 +279,7 @@ func(this*ArticleControllers)HanderAddArticle(){
 	article.Acontent=content
 	article.TwoArticleType=&twoArticleType
 	article.Key=key
+	article.Atime=time.Now()
 	article.User=&this.BaseControllers.User
 	//插入文章
 	_,err=o.Insert(&article)

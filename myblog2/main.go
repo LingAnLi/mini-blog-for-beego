@@ -10,6 +10,7 @@ import (
 )
 
 func main() {
+	beego.SetStaticPath("/data/artIng", "./data/artIng") //第一个是访问的路径，第二个是根下目录
 	beego.AddFuncMap("PrePage",PrePage)
 	beego.AddFuncMap("NextPage",NextPage)
 	beego.AddFuncMap("ShowI",ShowI)

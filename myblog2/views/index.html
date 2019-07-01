@@ -12,7 +12,7 @@
             <p class="blogtext">{{html2str .Acontent}}</p>
             <p class="bloginfo"><i class="avatar"><img src="/static/images/avatar.jpg"></i><span>{{.User.Name}}</span><span>{{.Atime.Format "2006-01-02:15:04"}}</span>
 
-              <span>【<a href="/list?typeId={{$.oneTypeId}}&towTypeId={{.TwoArticleType.Id}}">{{.TwoArticleType.TypeName}}</a>】</span>
+              <span>【{{.TwoArticleType.TypeName}}】</span>
               {{range .ArticLabels}}
                 <span>【{{.Name}}】</span>
               {{end}}
